@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
 import Home from './pages/home/Home';
+import From from './pages/auth/component/Form';
 
 function App() {
 
@@ -12,10 +13,11 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home/>} />
+          <Route path="/" element={<Home />} />
           <Route path="/navbar" element={<Navbar />} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/form" element={<From />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -1,10 +1,10 @@
 import React from 'react'
 
+import Form from './component/Form';
+
 const Register = () => {
   return (
-    <div>
-      
-    </div>
+   <Form type='Register'/>
   )
 }
 
