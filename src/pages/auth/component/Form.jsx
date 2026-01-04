@@ -1,7 +1,43 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import AuthServices from "./../../services/AuthService";
+import toast from "react-hot-toast";
 
-const Form = ({type}) => {
+const Form = ({ type }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const navigate = useNavigate();
+  const registerHandler = async (e) => {
+    try {
+      e.preventDefault();
+      const data = { email, password, username };
+      const res = await AuthServices.registerUser(data);
+      console.log(res.data);
+      navigate("/login");
+      toast.success(res.status.message);
+      
+    } catch (error) {
+      const message =  error?.response?.data?.message || "something went wrong"
+      toast.error(message)
+      console.log(error);
+    }
+  };
+  const loginhandler = async (e) => {
+    try {
+      e.preventDefault();
+      const data = { email, password };
+      const res = await AuthServices.loginUser(data);
+      toast.success(res.status.message);
+      console.log(res.data);
+      localStorage.setItem("token", res.data.token);
+
+      console.log("Token saved:", res.data.token);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className="h-screen flex justify-center items-center">
@@ -17,12 +53,15 @@ const Form = ({type}) => {
           <div className="">
             <label htmlFor="email"></label>
             <br />
+
             <input
               type="email"
+              required
               id="email"
               placeholder="Enter email"
               className="border text-lg border-lime-600 rounded-md p-1 "
-              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           {type === "Register" && (
@@ -35,6 +74,8 @@ const Form = ({type}) => {
                 placeholder="Enter username"
                 className="border text-lg  border-lime-600 rounded-md p-1 "
                 required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
           )}
@@ -47,25 +88,36 @@ const Form = ({type}) => {
               placeholder="Enter password"
               className="border text-lg  border-lime-600 rounded-md p-1 mb-2"
               required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           {type === "Register" ? (
             <p>
               if you already have an account. please{" "}
               <Link to="/login">
-                <b>SIGN IN</b>
+                <b className="hover:text-gray-900">SIGN IN</b>
               </Link>
             </p>
-          ):
-          (<p>if you dont have an account. Please {" "} <Link to = "/register"><b>SIGN UP</b></Link></p>)
-          }
-          <button className="bg-lime-600 p-2 border-none rounded-md w-full mt-5">
+          ) : (
+            <p>
+              if you dont have an account. Please{" "}
+              <Link to="/register">
+                <b className="hover:text-gray-900">SIGN UP</b>
+              </Link>
+            </p>
+          )}
+          <button
+            type="submit"
+            className="bg-lime-600 p-2 border-none rounded-md w-full mt-5 hover:bg-lime-500"
+            onClick={type === "Register" ? registerHandler : loginhandler}
+          >
             {type === "Register" ? "SIGN UP" : "SIGN IN"}
           </button>
         </form>
       </div>
     </>
   );
-}
+};
 
-export default Form
+export default Form;

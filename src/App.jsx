@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
+import { Toaster } from "react-hot-toast";
 import Navbar from './components/Navbar'
 import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
@@ -19,6 +20,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/form" element={<From />} />
         </Routes>
+        <Toaster/>
       </BrowserRouter>
     </>
   );
