@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   return (
+    
     <>
-      <div className="flex justify-between text-center p-5 bg-lime-600">
+      <div className="flex justify-between text-center p-5 bg-lime-600 mb-5">
         <div className="logo ml-5">
           <Link to="/" className="text-xl">
             NotesApp
