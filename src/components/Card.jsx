@@ -18,10 +18,7 @@ const Card = () => {
 
         <hr />
         <p className="p-2">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. In, veniam
-          saepe. Minus soluta quos in aliquid, voluptatum quam vero harum ipsum
-          ad molestiae, dicta, quasi aspernatur quo. Cumque, doloribus
-          consequuntur.
+          {}
         </p>
       </div>
     </>

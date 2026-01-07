@@ -1,13 +1,21 @@
 import { API } from "../http"
 
-//get token
-const token = localStorage.getItem("token")
-//make token common for all request
-API.defaults.headers.common['Authorization'] = `Bearer ${token}`
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 const createNote=(data)=>{
   API.post("/note/create",data)
 }
-const NoteService = {createNote}
+
+const getNote = (data) => {
+  return  API.get("/note/all",data)
+}
+const NoteService = {createNote ,getNote}
 export default NoteService
 
 
