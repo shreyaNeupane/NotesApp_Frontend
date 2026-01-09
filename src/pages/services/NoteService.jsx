@@ -15,7 +15,11 @@ const createNote=(data)=>{
 const getNote = (data) => {
   return  API.get("/note/all",data)
 }
-const NoteService = {createNote ,getNote}
+//delete note 
+const deleteNote = (id) => {
+   API.delete(`/note/delete/${id}`)
+}
+const NoteService = {createNote ,getNote ,deleteNote}
 export default NoteService
 
 

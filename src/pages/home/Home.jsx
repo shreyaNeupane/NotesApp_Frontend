@@ -15,7 +15,7 @@ const Home = () => {
       try {
         const res = await NoteService.getNote();
         setNotes(res.data.note);
-        console.log(res.data.note);
+        // console.log(res.data.note);
       } catch (error) {
         console.log(error);
       }
@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <div className="flex justify-end m-3">
+      <div className="flex justify-end m-3 ">
         <button
           onClick={() => navigate("/createNote")}
           className="bg-lime-600 font-semibold p-2 border-none rounded-md "
@@ -35,9 +35,9 @@ const Home = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-2 m-5">
         {notes.map((note) => (
-          <Card key={note._id} note={note} />
+          <Card key={note._id} note={note} setNotes={setNotes} />
         ))}
       </div>
     </>
