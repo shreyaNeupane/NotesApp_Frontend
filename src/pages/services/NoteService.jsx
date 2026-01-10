@@ -19,7 +19,11 @@ const getNote = (data) => {
 const deleteNote = (id) => {
    API.delete(`/note/delete/${id}`)
 }
-const NoteService = {createNote ,getNote ,deleteNote}
+//edit note
+const editNote = (id,data) => {
+  API.patch(`note/update/${id}`,data)
+}
+const NoteService = {createNote ,getNote ,deleteNote ,editNote}
 export default NoteService
 
 
